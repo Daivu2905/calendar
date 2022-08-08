@@ -3,17 +3,17 @@ $(document).ready(function() {
         header: {
             left: "prev,next today",
             center: "title",
-            right: "month,agendaWeek,agendaDay"
+            right: "agendaWeek,agendaDay"
         },
 
-        defaultView: "month",
+        defaultView: "basicWeek",
         navLinks: true, // can click day/week names to navigate views
         selectable: true,
         selectHelper: true,
         editable: true,
         eventLimit: true, // allow "more" link when too many events
 
-        select: function(start, end) {
+        select: $('.addBtn').click('.addBtn', function(start, end) {
             // Display the modal.
             // You could fill in the start and end fields based on the parameters
             $(".modal").modal("show");
@@ -27,8 +27,9 @@ $(document).ready(function() {
                 .find("#ends-at")
                 .val("");
             $("#save-event").show();
-            $("input").prop("readonly", false);
-        },
+            $("#edit").hide();
+
+        }),
 
         eventRender: function(event, element) {
             //dynamically prepend close button to event
@@ -39,9 +40,10 @@ $(document).ready(function() {
                 $("#calendar").fullCalendar("removeEvents", event._id);
             });
         },
-
         eventClick: function(calEvent, jsEvent) {
+
             // Display the modal and set event values.
+
             $(".modal").modal("show");
             $(".modal")
                 .find("#title")
@@ -52,10 +54,12 @@ $(document).ready(function() {
             $(".modal")
                 .find("#ends-at")
                 .val(calEvent.end);
+            $("#edit").show();
             $("#save-event").hide();
-            $("input").prop("readonly", true);
+
         }
     });
+
 
     // Bind the dates to datetimepicker.
     $("#starts-at, #ends-at").datetimepicker();
@@ -63,6 +67,10 @@ $(document).ready(function() {
     //click to save "save"
     $("#save-event").on("click", function(event) {
         var title = $("#title").val();
+        var id = Math.floor(Math.random() * 100);
+        // var title2 = $("#title2").val();
+        // console.log(title2);
+        console.log(id);
         if (title) {
             var eventData = {
                 title: title,
@@ -80,6 +88,24 @@ $(document).ready(function() {
         // hide modal
         $(".modal").modal("hide");
     });
+    $(".editBtn").on("click", function(event) {
+        var title2 = $("#title").val();
+        if (title) {
+            eventData = {
+                title: title2,
+                start: $("#starts-at").val(),
+                end: $("#ends-at").val()
+            };
+            $("#calendar").fullCalendar("renderEvent", eventData, true); // stick? = true
+        }
+        $("#calendar").fullCalendar("unselect");
 
-    $("textarea").autosize();
+        // Clear modal inputs
+        $(".modal")
+            .find("input")
+            .val("");
+        // hide modal
+        $(".modal").modal("hide");
+    });
+
 });

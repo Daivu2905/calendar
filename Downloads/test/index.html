@@ -12,16 +12,20 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.42/css/bootstrap-datetimepicker.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
-    <div id='calendar'></div>
+    <button id="add" class="addBtn" style="margin-left: 79.75em">Them moi</button>
+    <div id='calendar'>
+    </div>
 
     <div class="dropdown">
+
         <div class="dropdown-content">
 
         </div>
-        <button class="fa dropbtn" style="font-size:24px; margin-left: 75%; color: black"><span>&#xf128;</span></button>
+
     </div>
 
     <div id='datepicker'></div>
@@ -32,7 +36,7 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4><input class="modal-title" type="text" name="title" id="title" placeholder="Event Title" /></h4>
-                    <h4><input class="modal-title2" type="text" name="title2" id="title2" placeholder="Description" /></h4>
+                    <!-- <h4><input class="modal-title2" type="text" name="title2" id="title2" placeholder="Description" /></h4> -->
 
                 </div>
                 <div class="modal-body">
@@ -51,7 +55,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="save-event">Save</button>
+                    <button type="button" class="btn btn-primary " id="save-event">Save</button>
+                    <button type="button" class="btn btn-primary editBtn" id="edit">Edit</button>
                 </div>
             </div>
             <!-- /.modal-content -->
