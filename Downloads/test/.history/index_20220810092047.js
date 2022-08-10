@@ -110,7 +110,7 @@ $(document).ready(function() {
                 start: start,
                 end: end
             };
-            $("#calendar").fullCalendar("renderEvent", calEvent, true);
+            $("#calendar").fullCalendar("updateEvent", calEvent, true);
         }
         // calendar.fullCalendar('unselect');
 

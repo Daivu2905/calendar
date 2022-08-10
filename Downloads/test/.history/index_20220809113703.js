@@ -52,9 +52,6 @@ $(document).ready(function() {
                 .find("#id")
                 .val(calEvent.id);
             $(".modal")
-                .find("#title2")
-                .val(calEvent.title2);
-            $(".modal")
                 .find("#starts-at")
                 .val(calEvent.start);
             $(".modal")
@@ -72,15 +69,12 @@ $(document).ready(function() {
     //click to save "save"
     $("#save-event").on("click", function(event) {
         var title = $("#title").val();
-        var title2 = $("#title2").val();
-
         let id = Math.floor(Math.random() * 1000);
         console.log(id);
 
         if (title) {
             var eventData = {
                 title: title,
-                title2: title2,
                 id: id,
                 start: $("#starts-at").val(),
                 end: $("#ends-at").val()
@@ -97,22 +91,22 @@ $(document).ready(function() {
         $(".modal").modal("hide");
     });
 
-    $(".editBtn").on("click", function(event) {
-        var title = $("#title").val();
-        var id = $("#id").val();
-        var start = $("#starts-at").val();
-        var end = $("#ends-at").val();
-        console.log(id)
+    $(".editBtn").on("click", function(event, jsEvent, view) {
+        var title = prompt('Event Title:', event.title);
+        var id2 = $("#id").val();
+
         if (title) {
+            var start = $.fullCalendar.formatDate(event.start, "Y-MM-DD HH:mm:ss");
+            var end = $.fullCalendar.formatDate(event.end, "Y-MM-DD HH:mm:ss");
             calEvent = {
-                title: title,
-                id: id,
+                title: title2,
+                id: id2,
                 start: start,
-                end: end
+                end: end,
             };
-            $("#calendar").fullCalendar("renderEvent", calEvent, true);
+            $("#calendar").fullCalendar("updateEvent", calEvent);
         }
-        // calendar.fullCalendar('unselect');
+        calendar.fullCalendar('unselect');
 
         // Clear modal inputs
         $(".modal")

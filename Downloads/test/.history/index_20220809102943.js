@@ -40,20 +40,14 @@ $(document).ready(function() {
                 $("#calendar").fullCalendar("removeEvents", event._id);
             });
         },
-
         eventClick: function(calEvent, jsEvent) {
 
             // Display the modal and set event values.
+
             $(".modal").modal("show");
             $(".modal")
                 .find("#title")
                 .val(calEvent.title);
-            $(".modal")
-                .find("#id")
-                .val(calEvent.id);
-            $(".modal")
-                .find("#title2")
-                .val(calEvent.title2);
             $(".modal")
                 .find("#starts-at")
                 .val(calEvent.start);
@@ -66,22 +60,43 @@ $(document).ready(function() {
         }
     });
 
+
     // Bind the dates to datetimepicker.
     $("#starts-at, #ends-at").datetimepicker();
 
     //click to save "save"
+    // $("#save-event").on("click", function(event) {
+    //     var title = $("#title").val();
+    //     var id = Math.floor(Math.random() * 100);
+    //     // var title2 = $("#title2").val();
+    //     // console.log(title2);
+    //     console.log(id);
+    //     if (title) {
+    //         var eventData = {
+    //             title: title,
+    //             start: $("#starts-at").val(),
+    //             end: $("#ends-at").val()
+    //         };
+    //         $("#calendar").fullCalendar("renderEvent", eventData, true); // stick? = true
+    //     }
+    //     $("#calendar").fullCalendar("unselect");
+
+    //     // Clear modal inputs
+    //     $(".modal")
+    //         .find("input")
+    //         .val("");
+    //     // hide modal
+    //     $(".modal").modal("hide");
+    // });
+
     $("#save-event").on("click", function(event) {
         var title = $("#title").val();
-        var title2 = $("#title2").val();
-
-        let id = Math.floor(Math.random() * 1000);
+        // var title2 = $("#title2").val();
+        // console.log(title2);
         console.log(id);
-
         if (title) {
             var eventData = {
                 title: title,
-                title2: title2,
-                id: id,
                 start: $("#starts-at").val(),
                 end: $("#ends-at").val()
             };
@@ -96,23 +111,20 @@ $(document).ready(function() {
         // hide modal
         $(".modal").modal("hide");
     });
-
-    $(".editBtn").on("click", function(event) {
+    $(".btnEdit").on("click", function(event) {
         var title = $("#title").val();
-        var id = $("#id").val();
-        var start = $("#starts-at").val();
-        var end = $("#ends-at").val();
-        console.log(id)
+        // var title2 = $("#title2").val();
+        // console.log(title2);
+        console.log(id);
         if (title) {
-            calEvent = {
+            var eventData = {
                 title: title,
-                id: id,
-                start: start,
-                end: end
+                start: $("#starts-at").val(),
+                end: $("#ends-at").val()
             };
-            $("#calendar").fullCalendar("renderEvent", calEvent, true);
+            $("#calendar").fullCalendar("renderEvent", eventData, true); // stick? = true
         }
-        // calendar.fullCalendar('unselect');
+        $("#calendar").fullCalendar("unselect");
 
         // Clear modal inputs
         $(".modal")
@@ -121,5 +133,6 @@ $(document).ready(function() {
         // hide modal
         $(".modal").modal("hide");
     });
+}
 
 });

@@ -40,7 +40,6 @@ $(document).ready(function() {
                 $("#calendar").fullCalendar("removeEvents", event._id);
             });
         },
-
         eventClick: function(calEvent, jsEvent) {
 
             // Display the modal and set event values.
@@ -48,12 +47,6 @@ $(document).ready(function() {
             $(".modal")
                 .find("#title")
                 .val(calEvent.title);
-            $(".modal")
-                .find("#id")
-                .val(calEvent.id);
-            $(".modal")
-                .find("#title2")
-                .val(calEvent.title2);
             $(".modal")
                 .find("#starts-at")
                 .val(calEvent.start);
@@ -65,6 +58,7 @@ $(document).ready(function() {
 
         }
     });
+    formInput.append('<input type="hidden" name="id" id="id" value="' + id + '">');
 
     // Bind the dates to datetimepicker.
     $("#starts-at, #ends-at").datetimepicker();
@@ -72,16 +66,10 @@ $(document).ready(function() {
     //click to save "save"
     $("#save-event").on("click", function(event) {
         var title = $("#title").val();
-        var title2 = $("#title2").val();
-
-        let id = Math.floor(Math.random() * 1000);
-        console.log(id);
 
         if (title) {
             var eventData = {
                 title: title,
-                title2: title2,
-                id: id,
                 start: $("#starts-at").val(),
                 end: $("#ends-at").val()
             };
@@ -96,23 +84,17 @@ $(document).ready(function() {
         // hide modal
         $(".modal").modal("hide");
     });
-
     $(".editBtn").on("click", function(event) {
-        var title = $("#title").val();
-        var id = $("#id").val();
-        var start = $("#starts-at").val();
-        var end = $("#ends-at").val();
+        var title2 = $("#title").val();
         console.log(id)
         if (title) {
-            calEvent = {
-                title: title,
-                id: id,
-                start: start,
-                end: end
+            eventData = {
+                title: title2,
+                start: $("#starts-at").val(),
+                end: $("#ends-at").val()
             };
-            $("#calendar").fullCalendar("renderEvent", calEvent, true);
         }
-        // calendar.fullCalendar('unselect');
+        $("#calendar").fullCalendar("unselect");
 
         // Clear modal inputs
         $(".modal")

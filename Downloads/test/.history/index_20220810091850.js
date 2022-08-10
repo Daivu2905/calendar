@@ -72,15 +72,13 @@ $(document).ready(function() {
     //click to save "save"
     $("#save-event").on("click", function(event) {
         var title = $("#title").val();
-        var title2 = $("#title2").val();
-
         let id = Math.floor(Math.random() * 1000);
         console.log(id);
 
         if (title) {
             var eventData = {
                 title: title,
-                title2: title2,
+                title2: title2;
                 id: id,
                 start: $("#starts-at").val(),
                 end: $("#ends-at").val()
@@ -110,7 +108,7 @@ $(document).ready(function() {
                 start: start,
                 end: end
             };
-            $("#calendar").fullCalendar("renderEvent", calEvent, true);
+            $("#calendar").fullCalendar("updateEvent", calEvent, true);
         }
         // calendar.fullCalendar('unselect');
 
